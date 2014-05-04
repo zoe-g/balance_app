@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-BalanceApp::Application.config.secret_key_base = '08c4d080c769f75132322007aae35f609e0cc5f8a998e85c0eb6d710f9c0ab21e644d4e8b81e3b25cafaa33b19748d6a53917ef1459b05d135c8d0ae42973704'
+BalanceApp::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
