@@ -40,7 +40,7 @@ class AccountsController < ApplicationController
 
   private
     def account_params
-      params.require(:account).permit(:account_type_id, :active => true, :starting_balance)
+      params.require(:account).permit(:account_type_id, :starting_balance)
     end
 
 end
