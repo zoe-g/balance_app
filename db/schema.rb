@@ -11,9 +11,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140505011629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "accounts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "account_type_id"
+    t.boolean  "active"
+    t.decimal  "starting_balance", precision: 8, scale: 2
+    t.datetime "last_txn_added"
+    t.datetime "last_txn_cleared"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accounts", ["account_type_id"], name: "index_accounts_on_account_type_id", using: :btree
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
+
+  create_table "spend_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "transaction_type_id"
+    t.date     "transaction_date"
+    t.string   "to_or_from"
+    t.decimal  "amount",              precision: 8, scale: 2
+    t.integer  "spend_category_id"
+    t.string   "note"
+    t.boolean  "cleared"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transactions", ["account_id"], name: "index_transactions_on_account_id", using: :btree
+  add_index "transactions", ["spend_category_id"], name: "index_transactions_on_spend_category_id", using: :btree
+  add_index "transactions", ["transaction_type_id"], name: "index_transactions_on_transaction_type_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "email_address"
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
