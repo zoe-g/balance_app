@@ -4,4 +4,8 @@ BalanceApp::Application.routes.draw do
 
 	root to: 'pages#home'
 
+	get '/signup', to: 'users#new'
+	get'/signin', to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy'
+  
 end
