@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505011629) do
+ActiveRecord::Schema.define(version: 20140505185614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20140505011629) do
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
     t.integer  "account_type_id"
-    t.boolean  "active"
-    t.decimal  "starting_balance", precision: 8, scale: 2
+    t.boolean  "active",                                   default: false
+    t.decimal  "starting_balance", precision: 8, scale: 2, default: 0.0
     t.datetime "last_txn_added"
     t.datetime "last_txn_cleared"
     t.datetime "created_at"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140505011629) do
     t.decimal  "amount",              precision: 8, scale: 2
     t.integer  "spend_category_id"
     t.string   "note"
-    t.boolean  "cleared"
+    t.boolean  "cleared",                                     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
