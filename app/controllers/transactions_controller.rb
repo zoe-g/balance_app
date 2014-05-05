@@ -29,6 +29,7 @@ class TransactionsController < ApplicationController
     transaction = Transaction.find(params[:id])
     transaction.update_attributes transaction_params
     redirect_to transaction
+  end
 
   def destroy
     transaction = Transaction.find(params[:id])
