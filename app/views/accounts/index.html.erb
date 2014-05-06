@@ -1,0 +1,14 @@
+<ul class="nav nav-pills">
+  <li>
+    <%= link_to('add another account', new_account_path) %>
+  </li>
+</ul>
+
+
+<% @user_accounts.each do |account| %>
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <p class="lead"><%= link_to(account.account_type_id, account) %>
+    </div>
+  </div>
+<% end %>

@@ -2,37 +2,37 @@ class TransactionsController < ApplicationController
 	include TransactionsHelper
 
 	before_filter :signed_in_user
-	before_filter :transactions_owned, only: [:index, :create, :show, :edit, :update, :destroy]
+	before_filter :transactions_owned, only: [:index, :create, :edit, :update, :destroy]
 
+  #VIEW ALL TRANSACTIONS
   def index
-    @transactions = Transaction.all
+    @user_transactions = @current_user.transactions
   end
 
+  #ADD TRANSACTION
   def new
     @transaction = Transaction.new
+    @user_accounts = @current_user.accounts
   end
 
   def create
-    transaction = Transaction.create transaction_params
-    redirect_to transaction
-  end
-
-  def show
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.create(transaction_params)
+    redirect_to transactions_path
   end
 
   def edit
-    @transaction = Transaction.find(params[:id])
+    @transaction = @current_user.transactions.find(params[:id])
+    @user_accounts = @current_user.accounts
   end
 
   def update
-    transaction = Transaction.find(params[:id])
-    transaction.update_attributes transaction_params
-    redirect_to transaction
+    @transaction = @current_user.transactions.find(params[:id])
+    @transaction.update_attributes transaction_params
+    redirect_to transactions_path
   end
 
   def destroy
-    transaction = Transaction.find(params[:id])
+    transaction = @current_user.transactions.find(params[:id])
     transaction.delete
     redirect_to transactions_path
   end

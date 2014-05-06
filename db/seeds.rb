@@ -2,6 +2,10 @@ User.delete_all
 Account.delete_all
 Transaction.delete_all
 
+AccountType.delete_all
+TransactionType.delete_all
+SpendCategory.delete_all
+
 cash = AccountType.create(name: 'Cash')
 credit = AccountType.create(name: 'Credit')
 checking = AccountType.create(name: 'Checking')
@@ -23,9 +27,9 @@ outgoing = TransactionType.create(name: 'Spent')
 incoming = TransactionType.create(name: 'Received')
 transfer = TransactionType.create(name: 'Transfer')
 
-zoe = User.create(first_name: 'Zoe', email_address: 'zoe@zoeg.co')
-kenny = User.create(first_name: 'Kenny', email_address: 'kenny@zoeg.co')
-brian = User.create(first_name: 'Brian', email_address: 'brian@zoeg.co')
+zoe = User.create(first_name: 'Zoe', email_address: 'zoe@zoeg.co', password: 'password', password_confirmation: 'password')
+kenny = User.create(first_name: 'Kenny', email_address: 'kenny@zoeg.co', password: 'password', password_confirmation: 'password')
+brian = User.create(first_name: 'Brian', email_address: 'brian@zoeg.co', password: 'password', password_confirmation: 'password')
 
 z1 = Account.create(user_id: zoe.id, account_type_id: cash.id, active: true, starting_balance: 150.00)
 z2 = Account.create(user_id: zoe.id, account_type_id: credit.id, active: true, starting_balance: 150.00)

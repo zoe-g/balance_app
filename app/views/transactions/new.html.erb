@@ -1,0 +1,40 @@
+<h1>new transaction</h1>
+
+<%= form_for @transaction do |f| %>
+
+  <%= f.hidden_field :transaction_date, value: Date.today() %>
+
+  outgoing <%= f.radio_button(:transaction_type_id, 1) %><br>
+  incoming <%= f.radio_button(:transaction_type_id, 2) %><br>
+  transfer <%= f.radio_button(:transaction_type_id, 3) %><br>
+  <br>
+
+  <% @user_accounts.each do |account| %>
+    <%= AccountType.find(account.account_type_id).name %> <%= f.radio_button(:account_id, account.id) %><br>
+  <% end %>
+  <br>
+
+  amount <%= f.number_field(:amount, step: 0.01) %><br>
+  <br>
+
+  to/from <%= f.text_field :to_or_from %><br>
+  <br>
+
+  home <%= f.radio_button(:spend_category_id, 1) %><br>
+  getting around <%= f.radio_button(:spend_category_id, 2) %><br>
+  food <%= f.radio_button(:spend_category_id, 3) %><br>
+  phone/internet<%= f.radio_button(:spend_category_id, 4) %><br>  
+  health <%= f.radio_button(:spend_category_id, 5) %><br>
+  education <%= f.radio_button(:spend_category_id, 6) %><br>
+  personal <%= f.radio_button(:spend_category_id, 7) %><br>
+  clothing <%= f.radio_button(:spend_category_id, 8) %><br>
+  fun <%= f.radio_button(:spend_category_id, 9) %><br>
+  gifts <%= f.radio_button(:spend_category_id, 10) %><br>
+  misc <%= f.radio_button(:spend_category_id, 11) %><br>
+  <br>
+
+  optional note <%= f.number_field :note %><br>
+  <br>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

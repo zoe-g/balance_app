@@ -2,45 +2,32 @@ class AccountsController < ApplicationController
 	include AccountsHelper
 
 	before_filter :signed_in_user
-	before_filter :accounts_owned, only: [:index, :create, :show, :edit, :update, :destroy]
+	before_filter :accounts_owned, only: [:index, :update, :show]
 
+  # ACCOUNT SUMMARY
   def index
-    @accounts = Account.all
-  end
-
-  def new
-    @account = Account.new
-  end
-
-  def create
-    account = Account.create account_params
-    redirect_to account
-  end
-
-  def show
-    @account = Account.find(params[:id])
-    @transactions = @account.transactions
+    @user_accounts = @current_user.accounts
   end
 
   def edit
-    @account = Account.find(params[:id])
+    @account = @current_user.accounts.find(params[:id])
   end
 
   def update
-    account = Account.find(params[:id])
-    account.update_attributes account_params
-    redirect_to account
+    @account = @current_user.accounts.find(params[:id])
+    @account.update_attributes(account_params)
+    redirect_to accounts_path
   end
 
-  def destroy
-    account = Account.find(params[:id])
-    account.delete
-    redirect_to accounts_path
+  # ACCOUNT LEDGER
+  def show
+    @account = @current_user.accounts.find(params[:id])
+    @transactions = @account.transactions
   end
 
   private
     def account_params
-      params.require(:account).permit(:account_type_id, :starting_balance)
+      params.require(:account).permit(:active, :starting_balance)
     end
 
 end

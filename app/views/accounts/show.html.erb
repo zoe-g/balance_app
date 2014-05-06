@@ -1,0 +1,22 @@
+<ul class="nav nav-pills">
+  <li><%= link_to('delete this account', @account, :method => :delete, :confirm => 'are you sure?') %></li>
+  <div class='spacer'></div>
+</ul>
+
+<div class="row">
+  <div class="col-md-5 col-sm-5">
+    <p class="lead"><%= @account.account_type_id %></p>
+  </div>
+
+  <div class="col-md-7 col-sm-7">
+    <% @transactions.each do |transaction| %>
+      <%= transaction.transaction_type_id %>
+      <%= transaction.spend_category_id %>
+      <%= transaction.transaction_date %>
+      <%= transaction.to_or_from %>
+      <%= transaction.amount %>
+      <%= transaction.cleared %>
+      <%= transaction.note %>
+    <% end %>
+  </div>
+ </div>

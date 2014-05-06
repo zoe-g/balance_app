@@ -1,0 +1,14 @@
+<h1>activate account</h1>
+
+<%= form_for @account do |f| %>
+
+  activate <%= f.radio_button(:active, true) %><br>
+  deactivate <%= f.radio_button(:active, false) %><br>
+  <br>
+
+  starting balance <%= f.number_field(:starting_balance, step: 0.01) %><br>
+  
+  <br>
+  <%= f.submit class: "btn btn-primary" %>
+
+<% end %>

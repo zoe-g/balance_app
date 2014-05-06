@@ -1,0 +1,19 @@
+<ul class="nav nav-pills">
+  <li>
+<%= link_to('add transaction', new_transaction_path) %>
+  </li>
+</ul>
+
+<table class="table .table-striped">
+<% @user_transactions.each do |transaction| %>
+  <tr>
+    <td><%= transaction.transaction_type_id %></td>
+    <td><%= transaction.spend_category_id %></td>
+    <td><%= transaction.transaction_date %></td>
+    <td><%= transaction.to_or_from %></td>
+    <td><%= transaction.amount %></td>
+		<td><%= transaction.cleared %></td>
+    <td><%= transaction.note %></td>
+</tr>
+<% end %>
+</table>
