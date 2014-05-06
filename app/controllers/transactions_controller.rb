@@ -4,12 +4,12 @@ class TransactionsController < ApplicationController
 	before_filter :signed_in_user
 	before_filter :transactions_owned, only: [:index, :create, :edit, :update, :destroy]
 
-  #VIEW ALL TRANSACTIONS
+  # TRANSACTIONS
   def index
     @user_transactions = @current_user.transactions
   end
 
-  #ADD TRANSACTION
+  # NEW TRANSACTION
   def new
     @transaction = Transaction.new
     @user_accounts = @current_user.accounts
@@ -20,11 +20,13 @@ class TransactionsController < ApplicationController
     redirect_to transactions_path
   end
 
+  # EDIT TRANSACTION
   def edit
     @transaction = @current_user.transactions.find(params[:id])
     @user_accounts = @current_user.accounts
   end
 
+  # TRANSACTION
   def update
     @transaction = @current_user.transactions.find(params[:id])
     @transaction.update_attributes transaction_params

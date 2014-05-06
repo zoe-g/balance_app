@@ -1,14 +1,17 @@
-<ul class="nav nav-pills">
-  <li>
-    <%= link_to('add another account', new_account_path) %>
-  </li>
-</ul>
+
+<div class="row">
+  <aside class="col-md-4">
+    <h3><%= @user.first_name %></h3>
+    <h3><%= @user.email_address %></h3>
+  </aside>
+</div>
 
 
 <% @user_accounts.each do |account| %>
   <div class="row">
     <div class="col-md-4 col-sm-4">
-      <p class="lead"><%= link_to(account.account_type_id, account) %>
+      <p class="lead"><%= link_to(account.account_type_id, account_path(account) ) %>
+      <p class="lead"><%= link_to('update', edit_account_path(account) ) %>
     </div>
   </div>
 <% end %>

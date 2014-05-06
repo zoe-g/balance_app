@@ -4,11 +4,13 @@ class AccountsController < ApplicationController
 	before_filter :signed_in_user
 	before_filter :accounts_owned, only: [:index, :update, :show]
 
-  # ACCOUNT SUMMARY
+  # ACCOUNTS
   def index
+    @user = @current_user
     @user_accounts = @current_user.accounts
   end
 
+  # EDIT ACCOUNT
   def edit
     @account = @current_user.accounts.find(params[:id])
   end
@@ -19,7 +21,7 @@ class AccountsController < ApplicationController
     redirect_to accounts_path
   end
 
-  # ACCOUNT LEDGER
+  # ACCOUNT
   def show
     @account = @current_user.accounts.find(params[:id])
     @transactions = @account.transactions
