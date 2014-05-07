@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505185614) do
+ActiveRecord::Schema.define(version: 20140507185734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,17 +20,18 @@ ActiveRecord::Schema.define(version: 20140505185614) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon"
   end
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
     t.integer  "account_type_id"
-    t.boolean  "active",                                   default: false
-    t.decimal  "starting_balance", precision: 8, scale: 2, default: 0.0
+    t.decimal  "bank_balance",     precision: 8, scale: 2, default: 0.0
     t.datetime "last_txn_added"
     t.datetime "last_txn_cleared"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "current_balance",  precision: 8, scale: 2, default: 0.0
   end
 
   add_index "accounts", ["account_type_id"], name: "index_accounts_on_account_type_id", using: :btree
@@ -40,12 +41,14 @@ ActiveRecord::Schema.define(version: 20140505185614) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon"
   end
 
   create_table "transaction_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon"
   end
 
   create_table "transactions", force: true do |t|
@@ -72,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140505185614) do
     t.string   "remember_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
   end
 
 end

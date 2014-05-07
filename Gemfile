@@ -15,6 +15,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt', '~> 3.1.7'
 
+# Use Twilio API to send SMS notifications
+gem 'twilio-ruby', '~> 3.11.5'
+
 group :doc do
   gem 'sdoc', require: false
 end

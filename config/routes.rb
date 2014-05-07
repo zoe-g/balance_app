@@ -12,4 +12,9 @@ BalanceApp::Application.routes.draw do
 
   resources :accounts, except: [:new, :create, :destroy]
   resources :transactions, except: [:show]
+
+  get '/notifytest', to: 'send_text#index'
+  post '/notify/txn', to: 'send_text#inactive_transactions'
+  post '/notify/rec', to: 'send_text#inactive_reconcile'
+
 end
