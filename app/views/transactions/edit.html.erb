@@ -21,7 +21,7 @@
   to/from <%= f.text_field :to_or_from %><br>
   <br>
 
-  home <%= f.radio_button(:spend_category_id, 1) %><br>
+  <%= f.radio_button(:spend_category_id, 1) %><br>
   getting around <%= f.radio_button(:spend_category_id, 2) %><br>
   food <%= f.radio_button(:spend_category_id, 3) %><br>
   phone/internet<%= f.radio_button(:spend_category_id, 4) %><br>  
@@ -34,10 +34,12 @@
   misc <%= f.radio_button(:spend_category_id, 11) %><br>
   <br>
 
-  optional note <%= f.number_field :note %><br>
+  optional note <%= f.text_field :note %><br>
   <br>
 
   cleared <%= f.check_box :cleared, value: true %>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
+
+<%= link_to('Delete Transaction', @transaction, :method => :delete, :confirm => 'Are you sure?') %></li>

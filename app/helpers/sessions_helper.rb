@@ -17,7 +17,7 @@ module SessionsHelper
       # if not signed in, save current location in session object to be able to redirect after successful sign in.
       session[:return_to] = request.url
       # prompt sign in page
-      redirect_to signin_path, notice: "please sign in."
+      redirect_to signin_path
     end
   end
 
