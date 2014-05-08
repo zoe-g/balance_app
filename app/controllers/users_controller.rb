@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      Account.create(user_id: @user.id, account_type_id: 1)
+      Account.create(user_id: @user.id, account_type_id: 2)
+      Account.create(user_id: @user.id, account_type_id: 3)
+      Account.create(user_id: @user.id, account_type_id: 4)
       sign_in @user
       flash[:success] = "you're in! ready to get balanced?"
       redirect_to home_path
@@ -16,8 +20,6 @@ class UsersController < ApplicationController
       flash[:error] = "something's off balance. please try again."
       redirect_to signup_path
     end
-    #CREATE FOUR ACCOUNTS ASSOCIATED WITH THE USER IMMEDIATELY, SET CASH TO ACTIVE AND OTHERS TO INACTIVE
-    #LEAD THROUGH ACCOUNT SET UP PROCESS???
   end
 
   private

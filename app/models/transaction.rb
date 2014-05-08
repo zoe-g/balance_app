@@ -9,7 +9,4 @@ class Transaction < ActiveRecord::Base
   belongs_to :transaction_type
   belongs_to :spend_category
   
-  def self.owned(user)
-  end
-  
 end

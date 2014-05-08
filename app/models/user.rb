@@ -14,6 +14,28 @@ class User < ActiveRecord::Base
 
 	has_many :accounts
 	has_many :transactions, through: :accounts
+  
+  def helpers
+    ActionController::Base.helpers
+  end
+
+  def total_balance
+    total = []
+    self.accounts.each do |acc|
+      bal = acc.current_balance
+      total.push(bal)
+    end
+    return helpers.number_to_currency(total.sum)
+   end
+
+   def cleared_balance
+    total = []
+    self.accounts.each do |acc|
+      bal = acc.bank_balance
+      total.push(bal)
+    end
+    return helpers.number_to_currency(total.sum)
+   end
 
 	private
 		def create_remember_token

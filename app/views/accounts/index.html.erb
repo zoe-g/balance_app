@@ -13,8 +13,6 @@
 
   <% @user_accounts.each do |account| %>
     <tr>
-
-  <% if account.active == true %> 
       <td id="acct-type"><%= account.account_type.name %></td><!--sub image-->
       <td id="acct-bankbal">placeholder</td>
       <td id="acct-actbal">placeholder</td>
@@ -24,29 +22,16 @@
         <button><%= link_to('view', account_path(account)) %></button>
         <button><%= link_to('edit', edit_account_path(account)) %></button>
       </td>
-
-  <% else account.active == false %>
-      <td id="acct-type-inactive"><%= account.account_type.name %></td><!--sub image-->
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        <button><%= link_to('view', account_path(account)) %></button>
-        <button><%= link_to('edit', edit_account_path(account)) %></button>
-      </td>
-  <% end %>
-
     </tr>
   <% end %>
 
     <tr>
       <td id="acct-type">TOTAL</td><!--sub image-->
-      <td id="acct-bankbal">placeholder total</td>
-      <td id="acct-actbal">placeholder total</td>
+      <td id="acct-bankbal"><%= @cleared_balance %></td>
+      <td id="acct-actbal"><%= @total_balance %></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td><button><%= link_to('send to phone', notify_bal_path, :method => :post) %></button></td>
     </tr>
 
   </tbody>

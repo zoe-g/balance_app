@@ -8,6 +8,8 @@ class AccountsController < ApplicationController
   def index
     @user = @current_user
     @user_accounts = @current_user.accounts
+    @total_balance = @current_user.total_balance
+    @cleared_balance = @current_user.cleared_balance
   end
 
   # EDIT ACCOUNT
