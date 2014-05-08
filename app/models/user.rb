@@ -22,20 +22,29 @@ class User < ActiveRecord::Base
   def total_balance
     total = []
     self.accounts.each do |acc|
-      bal = acc.current_balance
+      bal = acc.actual_balance
       total.push(bal)
     end
     return helpers.number_to_currency(total.sum)
    end
 
-   def cleared_balance
+  def cleared_balance
     total = []
     self.accounts.each do |acc|
       bal = acc.bank_balance
       total.push(bal)
     end
     return helpers.number_to_currency(total.sum)
-   end
+  end
+
+  def last_txn_update
+    if self.transactions.first.nil?
+      return ''
+    else
+      last_update = self.transactions.order(:updated_at).last.updated_at
+      return last_update.to_date.to_formatted_s(:long)
+    end
+  end
 
 	private
 		def create_remember_token

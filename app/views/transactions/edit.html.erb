@@ -7,7 +7,6 @@
 
   outgoing <%= f.radio_button(:transaction_type_id, 1) %><br>
   incoming <%= f.radio_button(:transaction_type_id, 2) %><br>
-  transfer <%= f.radio_button(:transaction_type_id, 3) %><br>
   <br>
 
   <% @user_accounts.each do |account| %>
@@ -21,7 +20,7 @@
   to/from <%= f.text_field :to_or_from %><br>
   <br>
 
-  <%= f.radio_button(:spend_category_id, 1) %><br>
+  home <%= f.radio_button(:spend_category_id, 1) %><br>
   getting around <%= f.radio_button(:spend_category_id, 2) %><br>
   food <%= f.radio_button(:spend_category_id, 3) %><br>
   phone/internet<%= f.radio_button(:spend_category_id, 4) %><br>  

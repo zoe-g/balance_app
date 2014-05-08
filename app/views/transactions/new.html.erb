@@ -4,22 +4,33 @@
 
   <%= f.hidden_field :transaction_date, value: Date.today() %>
 
+  <!--hide these and select one based on the button the user clicked to get there-->
   outgoing <%= f.radio_button(:transaction_type_id, 1) %><br>
   incoming <%= f.radio_button(:transaction_type_id, 2) %><br>
   transfer <%= f.radio_button(:transaction_type_id, 3) %><br>
   <br>
 
+  <!--show for all-->
   <% @user_accounts.each do |account| %>
     <%= AccountType.find(account.account_type_id).name %> <%= f.radio_button(:account_id, account.id) %><br>
   <% end %>
   <br>
 
-  amount <%= f.number_field(:amount, step: 0.01) %><br>
+  <!--show for all-->
+  amount <%= f.number_field(:amount, step: 0.01, min: 0.01) %><br>
   <br>
 
+  <!--show this for outgoing + incoming-->
   to/from <%= f.text_field :to_or_from %><br>
+
+  <!--show this for transfer-->
+  <% @user_accounts.each do |account| %>
+    <%= AccountType.find(account.account_type_id).name %> <%= f.radio_button(:to_or_from, account.id) %><br>
+  <% end %>
+
   <br>
 
+  <!--show this for outgoing-->
   home <%= f.radio_button(:spend_category_id, 1) %><br>
   getting around <%= f.radio_button(:spend_category_id, 2) %><br>
   food <%= f.radio_button(:spend_category_id, 3) %><br>
@@ -33,8 +44,10 @@
   misc <%= f.radio_button(:spend_category_id, 11) %><br>
   <br>
 
-  optional note <%= f.number_field :note %><br>
+  <!--show for all-->
+  optional note <%= f.text_field :note %><br>
   <br>
 
+  <!--show for all-->
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

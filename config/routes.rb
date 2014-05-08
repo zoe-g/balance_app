@@ -10,11 +10,10 @@ BalanceApp::Application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
-  resources :accounts, except: [:new, :create, :destroy]
+  resources :accounts, only: [:index, :show]
   resources :transactions, except: [:show]
 
   post '/notify/bal', to: 'send_text#balance_info'
-  post '/notify/txn', to: 'send_text#inactive_transactions'
-  post '/notify/rec', to: 'send_text#inactive_reconcile'
+  post '/notify/rem', to: 'send_text#update_reminder'
 
 end

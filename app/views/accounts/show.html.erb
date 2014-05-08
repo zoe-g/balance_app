@@ -3,17 +3,15 @@
     <td>type</td>
     <td>bank balance</td>
     <td>actual balance</td>
-    <td>last entry</td>
-    <td>last balanced</td>
+    <td>last update</td>
   </thead>
 
   <tbody>
     <tr>
       <td id="acct-type"><%= @account.account_type.name %></td><!--sub image-->
-      <td id="acct-bankbal">placeholder</td>
-      <td id="acct-actbal">placeholder</td>
-      <td id="last-update">placeholder</td>
-      <td id="last-balanced">placeholder</td>
+      <td id="acct-bankbal"><%= number_to_currency(@account.actual_balance) %></td>
+      <td id="acct-actbal"><%= number_to_currency(@account.bank_balance) %></td>
+      <td id="last-update"><%= @account.last_txn_update %></td>
     </tr>
   </tbody>
 </table>
@@ -35,7 +33,7 @@
   <% @transactions.each do |transaction| %>
   <tr>
     <td id="txn-type"><%= transaction.transaction_type.name %></td><!--sub image-->
-    <td id="cat-type"><%= transaction.spend_category.name %></td><!--sub image-->
+    <td id="cat-type"><%= transaction.spend_category %></td><!--sub image-->
     <td id="txn-date"><%= transaction.transaction_date.to_formatted_s(:long) %></td>
     <td id="txn-desc"><%= transaction.to_or_from %></td>
     <td id="txn-note"><%= transaction.note %></td>

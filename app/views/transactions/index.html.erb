@@ -18,7 +18,7 @@
   <tr>
     <td id="txn-type"><%= transaction.account.account_type.name %></td><!--sub image-->
     <td id="txn-type"><%= transaction.transaction_type.name %></td><!--sub image-->
-    <td id="cat-type"><%= transaction.spend_category.name %></td><!--sub image-->
+    <td id="cat-type"><%= transaction.spend_category %></td><!--sub image-->
     <td id="txn-date"><%= transaction.transaction_date.to_formatted_s(:long) %></td>
     <td id="txn-desc"><%= transaction.to_or_from %></td>
     <td id="txn-note"><%= transaction.note %></td>

@@ -4,8 +4,7 @@
     <td>type</td>
     <td>bank balance</td>
     <td>actual balance</td>
-    <td>last entry</td>
-    <td>last balanced</td>
+    <td>last update</td>
     <td>options</td>
   </thead>
 
@@ -14,13 +13,11 @@
   <% @user_accounts.each do |account| %>
     <tr>
       <td id="acct-type"><%= account.account_type.name %></td><!--sub image-->
-      <td id="acct-bankbal">placeholder</td>
-      <td id="acct-actbal">placeholder</td>
-      <td id="last-update">placeholder</td>
-      <td id="last-balanced">placeholder</td>
+      <td id="acct-bankbal"><%= number_to_currency(account.actual_balance) %></td>
+      <td id="acct-actbal"><%= number_to_currency(account.bank_balance) %></td>
+      <td id="last-update"><%= account.last_txn_update %></td>
       <td>
-        <button><%= link_to('view', account_path(account)) %></button>
-        <button><%= link_to('edit', edit_account_path(account)) %></button>
+        <button><%= link_to('transactions', account_path(account)) %></button>
       </td>
     </tr>
   <% end %>
@@ -29,8 +26,7 @@
       <td id="acct-type">TOTAL</td><!--sub image-->
       <td id="acct-bankbal"><%= @cleared_balance %></td>
       <td id="acct-actbal"><%= @total_balance %></td>
-      <td></td>
-      <td></td>
+      <td><%= @last_txn_overall %></td>
       <td><button><%= link_to('send to phone', notify_bal_path, :method => :post) %></button></td>
     </tr>
 
