@@ -1,37 +1,37 @@
 <div class="row">
+  <div class="col-xs-12">
 
-<table class="table table-hover">
-  <thead>
-    <td>type</td>
-    <td>bank balance</td>
-    <td>actual balance</td>
-    <td>last update</td>
-    <td>options</td>
-  </thead>
+    <table class="table table-hover index">
+      <thead>
+        <td>account</td>
+        <td>actual balance</td>
+        <td>bank balance</td>
+        <td>last update</td>
+        <td>options</td>
+      </thead>
 
-  <tbody>
+      <tbody>
 
-  <% @user_accounts.each do |account| %>
-    <tr>
-      <td id="acct-type"><%= image_tag(account.account_type.icon, size: '40x40') %></img></td>
-      <td id="acct-bankbal"><%= number_to_currency(account.actual_balance) %></td>
-      <td id="acct-actbal"><%= number_to_currency(account.bank_balance) %></td>
-      <td id="last-update"><%= account.last_txn_update %></td>
-      <td>
-        <button><%= link_to('transactions', account_path(account)) %></button>
-      </td>
-    </tr>
-  <% end %>
+      <% @user_accounts.each do |account| %>
+        <tr>
+          <td id="acct-type"><%= image_tag(account.account_type.icon, size: '40x40') %></img></td>
+          <td id="acct-bankbal"><%= number_to_currency(account.actual_balance) %></td>
+          <td id="acct-actbal"><%= number_to_currency(account.bank_balance) %></td>
+          <td id="last-update"><%= account.last_txn_update %></td>
+          <td><%= button_to 'transactions', account_path(account), :method => :get, class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
 
-    <tr>
-      <td id="acct-type"></td>
-      <td id="acct-bankbal"><%= @cleared_balance %></td>
-      <td id="acct-actbal"><%= @total_balance %></td>
-      <td><%= @last_txn_overall %></td>
-      <td><button><%= link_to('send to phone', notify_bal_path, :method => :post) %></button></td>
-    </tr>
+        <tr id="total">
+          <td id="acct-type"></td>
+          <td id="acct-actbal"><%= @total_balance %></td>
+          <td id="acct-bankbal"><%= @cleared_balance %></td>
+          <td><%= @last_txn_overall %></td>
+          <td><%= button_to 'send to phone', notify_bal_path, :method => :post, class: "btn btn-success" %></td>
+        </tr>
 
-  </tbody>
-</table>
-
+      </tbody>
+    </table>
+    
+  </div>
 </div>

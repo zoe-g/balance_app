@@ -1,44 +1,63 @@
-<h1>edit transaction</h1>
+<div class="row">
 
 <%= form_for @transaction do |f| %>
 
-  <%= f.date_field :transaction_date %><br>
-  <br>
+  <div class="col-xs-12 col-lg-12">
+    <!-- jQuery set to add value of 1, 2, or 3 based on clicking on button -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger" id="paid">paid out</button>
+      <button type="button" class="btn btn-success" id="received">received</button>
+      </div>
+      <%= f.hidden_field :transaction_type_id %>
+    </div>
+      
+    <div class="col-xs-12 col-sm-offset-3 col-sm-8">    
+      <br>
+      <% @user_accounts.each do |account| %>
+      <div class="col-xs-3 col-sm-2 acct">
+        <%= image_tag(AccountType.find(account.account_type_id).icon, height: '50') %><br>
+        <%= f.radio_button :account_id, value: account.id, class: "form-control" %>
+      </div>
+      <% end %>   
+    </div>
 
-  outgoing <%= f.radio_button(:transaction_type_id, 1) %><br>
-  incoming <%= f.radio_button(:transaction_type_id, 2) %><br>
-  <br>
+    <div class="col-xs-offset-2 col-xs-8 col-sm-offset-4 col-sm-4">
+      <br>
+      <%= f.date_field :transaction_date %><br>
 
-  <% @user_accounts.each do |account| %>
-    <%= image_tag(AccountType.find(account.account_type_id).icon, size: '40x40') %> <%= f.radio_button(:account_id, account.id) %><br>
-  <% end %>
-  <br>
+      <br>
+      <%= f.number_field :amount, step: 0.01, min: 0.01, placeholder: "amount", class: "form-control" %>
 
-  amount <%= f.number_field(:amount, step: 0.01) %><br>
-  <br>
+      <span id="paid-option"><!--show for outgoing only-->
+      <br>
+      <%= f.text_field :to_or_from, placeholder: "to", class: "form-control" %>
+      </span>
+      
+      <span id="received-option"><!--show for incoming only-->
+      <br>
+      <%= f.text_field :to_or_from, placeholder: "from", class: "form-control" %>
+      </span>
 
-  to/from <%= f.text_field :to_or_from %><br>
-  <br>
+      <br>
+      <%= f.text_field :note, placeholder: "optional note", class: "form-control" %>
 
-  home <%= f.radio_button(:spend_category_id, 1) %><br>
-  getting around <%= f.radio_button(:spend_category_id, 2) %><br>
-  food <%= f.radio_button(:spend_category_id, 3) %><br>
-  phone/internet<%= f.radio_button(:spend_category_id, 4) %><br>  
-  health <%= f.radio_button(:spend_category_id, 5) %><br>
-  education <%= f.radio_button(:spend_category_id, 6) %><br>
-  personal <%= f.radio_button(:spend_category_id, 7) %><br>
-  clothing <%= f.radio_button(:spend_category_id, 8) %><br>
-  fun <%= f.radio_button(:spend_category_id, 9) %><br>
-  gifts <%= f.radio_button(:spend_category_id, 10) %><br>
-  misc <%= f.radio_button(:spend_category_id, 11) %><br>
-  <br>
+      <span id="spend-options"><!--show for outgoing only-->
+        <br>
+        for <%= f.select :spend_category_id, @spend_categories.all.collect { |cat| [ cat.name, cat.id ] }, class: "form-control" %>
+      </span>
 
-  optional note <%= f.text_field :note %><br>
-  <br>
+    </div>
 
-  cleared <%= f.check_box :cleared, value: true %>
+    <div class="col-xs-12">
+      <br>
+      <%= f.submit "update transaction", class: "btn btn-warning" %>
+    </div>
 
-  <%= f.submit class: "btn btn-primary" %>
-<% end %>
+    <% end %><!--form-->
 
-<%= link_to('Delete Transaction', @transaction, :method => :delete, :confirm => 'Are you sure?') %></li>
+    <div class="col-xs-12">
+      <br>
+      <%= button_to "delete transaction", @transaction, :method => :delete, :confirm => 'Are you sure?', class: "btn btn-danger" %></li>
+    </div>
+
+</div>

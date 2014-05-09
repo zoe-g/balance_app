@@ -58,7 +58,7 @@ img {
 
 .acct img {
 	background-color: #f0ad4e;
-	border-radius: 50%;
+	border-radius: 30%;
 	text-align: center;
 }
 
@@ -68,4 +68,37 @@ img {
 
 #transfer-option {
 	display: none;
+}
+
+table tbody {
+	font-family: 'Architects Daughter', cursive;
+	font-size: 18px;
+	color: #428bca;
+}
+
+table thead {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+table #total {
+	font-weight: bold;
+	color: #5cb85c;
+}
+
+table img {
+	background-color: #428bca;
+	border-radius: 30%;
+	text-align: center;
+}
+
+.acct-update {
+	text-align: left;
+	color: #5cb85c;
+}
+
+.acct-update img {
+	background-color: #5cb85c;
+	border-radius: 30%;
+	text-align: center;
 }

@@ -1,31 +1,40 @@
+<div class="row">
+  <div class="col-xs-12 acct-update">
+    
+    <h4>all transactions</h4>
 
-<table class="table table-hover">
-  <thead>
-    <td>what</td>
-    <td></td>
-    <td></td>
-    <td>when</td>
-    <td>who</td>
-    <td>why</td>
-    <td>how much</td>
-    <td>cleared?</td>
-    <td>options</td>
-  </thead>
+    <table class="table table-hover detail">
+      <thead>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>when</td>
+        <td>who</td>
+        <td>why</td>
+        <td>how much</td>
+        <td>cleared?</td>
+        <td></td>
+      </thead>
 
-  <tbody>
+      <tbody>
 
-  <% @user_transactions.each do |transaction| %>
-  <tr>
-    <td id="txn-type"><%= image_tag(transaction.account.account_type.icon, size: '35x35') %></td>
-    <td id="txn-type"><%= transaction.transaction_type.name %></td><!--sub image-->
-    <td id="cat-type"><%= transaction.spend_category %></td><!--sub image-->
-    <td id="txn-date"><%= transaction.transaction_date.to_formatted_s(:long) %></td>
-    <td id="txn-desc"><%= transaction.to_or_from %></td>
-    <td id="txn-note"><%= transaction.note %></td>
-    <td id="txn-amt"><%= number_to_currency(transaction.amount) %></td>
-    <td><button><%= link_to('edit', edit_transaction_path(transaction.id)) %></button></td>
-  </tr>
-  <% end %>
+      <% @user_transactions.each do |transaction| %>
+      <tr>
+        <td><%= image_tag transaction.account.account_type.icon, height: '35' %></td>
+        <td><%= image_tag transaction.transaction_type.icon, height: '35' %></td>
+        <td><%= image_tag transaction.spend_category.icon, height: '35' %></td>
+        <td><%= transaction.transaction_date.to_formatted_s(:long) %></td>
+        <td><%= transaction.to_or_from %></td>
+        <td><%= transaction.note %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
+        <td><%= form_for transaction do |f| %><%= f.check_box :cleared, value: true %><% end %></td>
+        <!--add jquery to auto-submit cleared checkbox!!-->
+        <td><%= button_to 'edit', edit_transaction_path(transaction.id), :method => :get, class: "btn btn-warning" %></td>
+      </tr>
+      <% end %>
 
-  </tbody>
-</table>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
