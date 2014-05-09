@@ -1,30 +1,32 @@
-# User.delete_all
-# Account.delete_all
-# Transaction.delete_all
 # AccountType.delete_all
 # TransactionType.delete_all
 # SpendCategory.delete_all
 
-cash = AccountType.create(name: 'cash')
-credit = AccountType.create(name: 'credit')
-checking = AccountType.create(name: 'checking')
-saving = AccountType.create(name: 'saving')
+cash = AccountType.create(name: 'cash', icon: 'account_cash.png')
+credit = AccountType.create(name: 'credit', icon: 'account_credit.png')
+checking = AccountType.create(name: 'checking', icon: 'account_checking.png')
+saving = AccountType.create(name: 'saving', icon: 'account_saving.png')
 
-home = SpendCategory.create(name: 'home')
-getting_around = SpendCategory.create(name: 'getting around')
-food = SpendCategory.create(name: 'food')
-phone_internet = SpendCategory.create(name: 'phone/internet')
-health = SpendCategory.create(name: 'health')
-education = SpendCategory.create(name: 'education')
-personal = SpendCategory.create(name: 'personal')
-clothing = SpendCategory.create(name: 'clothing')
-fun = SpendCategory.create(name: 'fun')
-gifts = SpendCategory.create(name: 'gifts')
-misc = SpendCategory.create(name: 'miscellaneous')
+none = SpendCategory.create(name: 'none', icon: 'spend_none.png')
+home = SpendCategory.create(name: 'home', icon: 'spend_home.png')
+getting_around = SpendCategory.create(name: 'getting around', icon: 'spend_transportation.png')
+food = SpendCategory.create(name: 'food', icon: 'spend_food.png')
+phone_internet = SpendCategory.create(name: 'phone/internet', icon: 'spend_internet.png')
+health = SpendCategory.create(name: 'health', icon: 'spend_health.png')
+education = SpendCategory.create(name: 'education', icon: 'spend_education.png')
+personal = SpendCategory.create(name: 'personal', icon: 'spend_personal.png')
+clothing = SpendCategory.create(name: 'clothing', icon: 'spend_clothing.png')
+fun = SpendCategory.create(name: 'fun', icon: 'spend_fun.png')
+gifts = SpendCategory.create(name: 'gifts', icon: 'spend_gifts.png')
+misc = SpendCategory.create(name: 'miscellaneous', icon: 'spend_misc.png')
 
-outgoing = TransactionType.create(name: 'spent')
-incoming = TransactionType.create(name: 'received')
+outgoing = TransactionType.create(name: 'spent', icon: 'txn_neg.png')
+incoming = TransactionType.create(name: 'received', icon: 'txn_pos.png')
 transfer = TransactionType.create(name: 'transfer')
+
+# User.delete_all
+# Account.delete_all
+# Transaction.delete_all
 
 # zoe = User.create(first_name: 'Zoe', email_address: 'zoe@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
 # kenny = User.create(first_name: 'Kenny', email_address: 'kenny@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')

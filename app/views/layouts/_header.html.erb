@@ -1,39 +1,33 @@
 <div class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/home">balanced</a>
-    </div>
+  <div class="navbar-header">
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/home">balanced</a>
+</div>
 
     <div class="navbar-collapse collapse">
-      <% if signed_in? %>
-      
-        <ul class="nav navbar-nav">
-          <li><%= link_to "out", new_transaction_path %></li><!--add image-->
-          <li><%= link_to "in", new_transaction_path %></li><!--add image-->
-          <li><%= link_to "txr", new_transaction_path %></li><!--add image-->
-        </ul>
+      <ul class="nav navbar-nav navbar-right">
 
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to @current_user.first_name.downcase+"'s money", accounts_path %></a></li>
+      <% if signed_in? %>
+        
+          <li><%= link_to 'add transaction', new_transaction_path %></a></li>
+          <li><%= link_to 'check balances', accounts_path %></a></li>
           <li><%= link_to 'sign out', signout_path, method: 'delete' %></li>
-        </ul>
 
       <% else %>
      
-        <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "sign up", signup_path %></li>
           <li><%= link_to "sign in", signin_path %></li>          
-        </ul>
-
+        
       <% end %>
+
+      </ul>
     </div>
-  
   </div>
 </div>
+

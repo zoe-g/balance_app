@@ -2,25 +2,32 @@
 <html>
 <head>
   <title>balanced</title>
+  <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door|Architects+Daughter' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.png' %>
 </head>
 <body>
+  <div class="container">
+    <%= render 'layouts/header' %>
+  </div>
+
 	<div class="container">
-		<%= render 'layouts/header' %>
-    
-  	<div class="row">
-      <div class="col-md-12 col-sm-12">
-       
+    <div class="background"></div>
+      
+      <div class="row">
         <%flash.each do|key,value|%>
-					<div class="heads up! <%=key%>"> <%=value%> </div>
+  				<%=key%>: <%=value%>
         <%end%>
-        
+      </div><!--row-->
+
+      <div class="row">
         <%= yield %>
-      </div>
-    </div>
-	
-	</div>
+      </div><!--row-->
+    
+    </div><!-- background -->
+	</div><!-- container -->
+  
 </body>
 </html>

@@ -8,7 +8,7 @@
 
   <tbody>
     <tr>
-      <td id="acct-type"><%= @account.account_type.name %></td><!--sub image-->
+      <td id="acct-type"><%= image_tag(@account.account_type.icon, size: '40x40') %></td>
       <td id="acct-bankbal"><%= number_to_currency(@account.actual_balance) %></td>
       <td id="acct-actbal"><%= number_to_currency(@account.bank_balance) %></td>
       <td id="last-update"><%= @account.last_txn_update %></td>

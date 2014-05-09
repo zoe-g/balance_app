@@ -1,10 +1,13 @@
+<div class="row">
+	<%= link_to image_tag("txn_pos.png", alt: "new transaction", height: "80"), new_transaction_path %>
+	<h2>time to get balanced.</h2>
+	<span class="text-muted">add recent transactions or update accounts</span>
+</div>
 
-<%= link_to "out", new_transaction_path %><br><!--sub image-->
-<%= link_to "in", new_transaction_path %><br><!--sub image-->
-<%= link_to "txr", new_transaction_path %><br><!--sub image-->
-
-<br>
-
-<% @user_accounts.each do |account| %>
-	<%= link_to account.account_type.name, account_path(account) %><br><!--sub image-->
-<% end %>
+<div class="row">
+	<% @user_accounts.each do |account| %>
+		<div class="col-xs-3">
+		<%= link_to image_tag(account.account_type.icon, alt: account.account_type.name, height: "100"), account_path(account) %>
+		</div>
+	<% end %>
+</div>

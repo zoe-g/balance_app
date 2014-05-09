@@ -1,13 +1,18 @@
-<h1>sign in</h1>
+<div class="row">
+	<div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+		<br><br>
 
-  <%= form_for :session do |f| %>
+	  <%= form_for :session do |f| %>
 
-    <%= f.email_field :email_address, placeholder: 'email address' %><br>
-    <br>
-    <%= f.password_field :password, placeholder: 'password' %><br>
-    <br>
-    <%= f.submit "sign in", class: "btn btn-large btn-primary" %>
+	    <%= f.email_field :email_address, placeholder: 'email address', class: "form-control" %><br>
+	    <%= f.password_field :password, placeholder: 'password', class: "form-control" %><br>
+	    <%= f.submit "sign in", class: "btn btn-default" %>
 
-  <% end %>
+	  <% end %>
 
-<p>new user? <%= link_to "sign up now!", signup_path %></p>
+		<br><br>
+		
+		<p>new user? <%= link_to "sign up now!", signup_path %></p>
+
+	</div>
+</div>

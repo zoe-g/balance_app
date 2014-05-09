@@ -10,7 +10,7 @@
   <br>
 
   <% @user_accounts.each do |account| %>
-    <%= AccountType.find(account.account_type_id).name %> <%= f.radio_button(:account_id, account.id) %><br>
+    <%= image_tag(AccountType.find(account.account_type_id).icon, size: '40x40') %> <%= f.radio_button(:account_id, account.id) %><br>
   <% end %>
   <br>
 

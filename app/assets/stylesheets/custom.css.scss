@@ -5,10 +5,67 @@ html {
 }
 
 body {
+	font-family: 'The Girl Next Door', cursive;
+	text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.navbar {
-  margin-bottom: 20px;
+img {
+	opacity: 0.7;
+}
+
+.navbar-header .navbar-brand {
+	font-family: 'Architects Daughter', cursive;
+	font-size: 32px;
+	color: #3D3D3D;
+}
+
+.navbar-right {
+	font-size: 18px;
+	color: #3D3D3D;
+}
+
+.container {
+	position: relative;
+}
+
+.container .background {
+	position: absolute;
+	min-height: 500px;
+	top: 75px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: image-url('balance_logo.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: 0% 100%, center;
+	opacity: 0.3;
+}
+
+.container .row {
+	position: relative;
+	z-index: 1;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}
+
+.form-control {
+	font-family: 'Architects Daughter', cursive;
+}
+
+.acct img {
+	background-color: #f0ad4e;
+	border-radius: 50%;
+	text-align: center;
+}
+
+#received-option {
+	display: none;
+}
+
+#transfer-option {
+	display: none;
 }

@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Account do
+describe "accounts/show" do
 
 end

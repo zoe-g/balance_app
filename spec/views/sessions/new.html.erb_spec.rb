@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe UsersController do
+describe "sessions/new" do
 
 end

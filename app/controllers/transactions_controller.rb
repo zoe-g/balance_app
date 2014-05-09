@@ -13,6 +13,7 @@ class TransactionsController < ApplicationController
   def new
     @transaction = Transaction.new
     @user_accounts = @current_user.accounts
+    @spend_categories = SpendCategory.all
   end
 
   def create
@@ -37,6 +38,7 @@ class TransactionsController < ApplicationController
   def edit
     @transaction = @current_user.transactions.find(params[:id])
     @user_accounts = @current_user.accounts
+    @spend_categories = SpendCategory.all
   end
 
   # TRANSACTION

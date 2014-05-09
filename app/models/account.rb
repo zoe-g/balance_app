@@ -6,6 +6,7 @@ class Account < ActiveRecord::Base
   belongs_to :user
   belongs_to :account_type
   has_many :transactions
+  has_many :account_types
 
 
   def actual_balance
