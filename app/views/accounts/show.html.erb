@@ -1,5 +1,7 @@
 <div class="row">
 
+    <!-- summarizes information about one of the user's accounts, and details the transactions within it -->
+
   <div class="col-xs-4 col-sm-2 acct-update">
     <%= image_tag(@account.account_type.icon, height: '100') %>
   </div>
@@ -29,14 +31,13 @@
 
     <% @transactions.each do |transaction| %>
     <tr>
-      <td><%= image_tag transaction.transaction_type.icon, height: '35' %></td><!--sub image-->
-      <td><%= image_tag transaction.spend_category.icon, height: '35' %></td><!--sub image-->
+      <td><%= image_tag transaction.transaction_type.icon, height: '35' %></td>
+      <td><%= image_tag transaction.spend_category.icon, height: '35' %></td>
       <td><%= transaction.transaction_date.to_formatted_s(:long) %></td>
       <td><%= transaction.to_or_from %></td>
       <td><%= transaction.note %></td>
       <td><%= number_to_currency(transaction.amount) %></td>
-      <td><%= form_for transaction do |f| %><%= f.check_box :cleared, value: true %><% end %></td>
-      <!--add jquery to auto-submit cleared checkbox!!-->
+      <td><%= form_for transaction do |f| %><%= f.check_box :cleared, value: true %> <%= f.submit "update" %><% end %></td>
       <td><%= button_to 'edit', edit_transaction_path(transaction.id), :method => :get, class: "btn btn-warning" %></td>
     </tr>
     <% end %>

@@ -6,6 +6,7 @@ class SendTextController < ApplicationController
 	def index
 	end
 
+	# sends a user their balance information via SMS through the Twilio API
 	def balance_info
 		twilio_sid = ENV['TWILIO_SID']
   	twilio_token = ENV['TWILIO_TOKEN']
@@ -27,6 +28,7 @@ class SendTextController < ApplicationController
     redirect_to accounts_path
 	end
  
+ 	# sends a user a reminder to log in after a period of inactivity (notification schedule not yet implemented)
  	def update_reminder
 		twilio_sid = ENV['TWILIO_SID']
   	twilio_token = ENV['TWILIO_TOKEN']

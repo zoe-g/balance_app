@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508043353) do
+ActiveRecord::Schema.define(version: 20140509091015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140508043353) do
     t.date     "transaction_date"
     t.string   "to_or_from"
     t.float    "amount"
-    t.integer  "spend_category_id"
+    t.integer  "spend_category_id",   default: 1
     t.string   "note"
     t.boolean  "cleared",             default: false
     t.datetime "created_at"

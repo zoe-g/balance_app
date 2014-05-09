@@ -14,6 +14,6 @@ BalanceApp::Application.routes.draw do
   resources :transactions, except: [:show]
 
   post '/notify/bal', to: 'send_text#balance_info'
-  post '/notify/rem', to: 'send_text#update_reminder'
+  post '/notify/rem', to: 'send_text#update_reminder' #not yet scheduled to run
 
 end

@@ -1,6 +1,9 @@
-# AccountType.delete_all
-# TransactionType.delete_all
-# SpendCategory.delete_all
+AccountType.delete_all
+TransactionType.delete_all
+SpendCategory.delete_all
+User.delete_all
+Account.delete_all
+Transaction.delete_all
 
 cash = AccountType.create(name: 'cash', icon: 'account_cash.png')
 credit = AccountType.create(name: 'credit', icon: 'account_credit.png')
@@ -24,15 +27,41 @@ outgoing = TransactionType.create(name: 'spent', icon: 'txn_neg.png')
 incoming = TransactionType.create(name: 'received', icon: 'txn_pos.png')
 transfer = TransactionType.create(name: 'transfer')
 
-# User.delete_all
-# Account.delete_all
-# Transaction.delete_all
+fred = User.create(first_name: 'fred', email_address: 'fred@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
+wilma = User.create(first_name: 'wilma', email_address: 'wilma@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
 
-# zoe = User.create(first_name: 'Zoe', email_address: 'zoe@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
-# kenny = User.create(first_name: 'Kenny', email_address: 'kenny@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
-# brian = User.create(first_name: 'Brian', email_address: 'brian@zoeg.co', phone: '3108491161', password: 'password', password_confirmation: 'password')
+fred1 = Account.create(user_id: fred.id, account_type_id: cash.id)
+fred2 = Account.create(user_id: fred.id, account_type_id: credit.id)
+fred3 = Account.create(user_id: fred.id, account_type_id: checking.id)
+fred4 = Account.create(user_id: fred.id, account_type_id: saving.id)
 
-# a = Transaction.create(account_id: , transaction_type_id: outgoing.id, transaction_date: z1.created_at.to_date, to_or_from: 'Taxi', amount: -15.00, spend_category_id: getting_around.id, cleared: true)
-# b = Transaction.create(account_id: , transaction_type_id: incoming.id, transaction_date: z1.created_at.to_date, to_or_from: 'Ticket Reimbursement', amount: 5.00, spend_category_id: fun.id, note: 'paid back', cleared: true)
-# c = Transaction.create(account_id: , transaction_type_id: outgoing.id, transaction_date: k1.created_at.to_date, to_or_from: 'Limo', amount: -15.00, spend_category_id: getting_around.id, note: 'love me some taxis!', cleared: true)
-# d = Transaction.create(account_id: , transaction_type_id: outgoing.id, transaction_date: b1.created_at.to_date, to_or_from: 'Gas', amount: -15.00, spend_category_id: getting_around.id, cleared: true)
+wilma1 = Account.create(user_id: wilma.id, account_type_id: cash.id)
+wilma2 = Account.create(user_id: wilma.id, account_type_id: credit.id)
+wilma3 = Account.create(user_id: wilma.id, account_type_id: checking.id)
+wilma4 = Account.create(user_id: wilma.id, account_type_id: saving.id)
+
+Transaction.create(account_id: fred1.id, transaction_type_id: outgoing.id, spend_category_id: 1, transaction_date: Date.today.days_ago(10), to_or_from: 'barney', amount: -10)
+Transaction.create(account_id: fred1.id, transaction_type_id: incoming.id, spend_category_id: 2, transaction_date: Date.today.days_ago(20), to_or_from: 'wilma', amount: 20)
+Transaction.create(account_id: fred1.id, transaction_type_id: outgoing.id, spend_category_id: 3, transaction_date: Date.today.days_ago(2), to_or_from: 'betty', amount: -30)
+Transaction.create(account_id: fred2.id, transaction_type_id: incoming.id, spend_category_id: 4, transaction_date: Date.today.days_ago(5)Date.today.days_ago(1), to_or_from: 'bam bam', amount: 40)
+Transaction.create(account_id: fred2.id, transaction_type_id: outgoing.id, spend_category_id: 5, transaction_date: Date.today.days_ago(34), to_or_from: 'pebbles', amount: -3.14)
+Transaction.create(account_id: fred2.id, transaction_type_id: incoming.id, spend_category_id: 6, transaction_date: Date.today.days_ago(11), to_or_from: 'dino', amount: 500)
+Transaction.create(account_id: fred3.id, transaction_type_id: outgoing.id, spend_category_id: 7, transaction_date: Date.today.days_ago(21), to_or_from: 'arnold', amount: -20)
+Transaction.create(account_id: fred3.id, transaction_type_id: incoming.id, spend_category_id: 8, transaction_date: Date.today.days_ago(15), to_or_from: 'sam', amount: 1.34)
+Transaction.create(account_id: fred3.id, transaction_type_id: outgoing.id, spend_category_id: 9, transaction_date: Date.today.days_ago(17), to_or_from: 'tex', amount: -54.7)
+Transaction.create(account_id: fred4.id, transaction_type_id: incoming.id, spend_category_id: 10, transaction_date: Date.today.days_ago(10), to_or_from: 'mr. slate', amount: 1000)
+Transaction.create(account_id: fred4.id, transaction_type_id: outgoing.id, spend_category_id: 11, transaction_date: Date.today.days_ago(8), to_or_from: 'hoppy', amount: -250)
+Transaction.create(account_id: fred4.id, transaction_type_id: incoming.id, spend_category_id: 12, transaction_date: Date.today.days_ago(2), to_or_from: 'joe', amount: 27)
+
+Transaction.create(account_id: wilma1.id, transaction_type_id: incoming.id, spend_category_id: 1, transaction_date: Date.today.days_ago(14), to_or_from: 'joe', amount: 27)
+Transaction.create(account_id: wilma1.id, transaction_type_id: outgoing.id, spend_category_id: 2, transaction_date: Date.today.days_ago(15), to_or_from: 'barney', amount: -10)
+Transaction.create(account_id: wilma1.id, transaction_type_id: incoming.id, spend_category_id: 3, transaction_date: Date.today.days_ago(1), to_or_from: 'wilma', amount: 20)
+Transaction.create(account_id: wilma2.id, transaction_type_id: outgoing.id, spend_category_id: 4, transaction_date: Date.today.days_ago(2), to_or_from: 'betty', amount: -30)
+Transaction.create(account_id: wilma2.id, transaction_type_id: incoming.id, spend_category_id: 5, transaction_date: Date.today.days_ago(5), to_or_from: 'bam bam', amount: 40)
+Transaction.create(account_id: wilma2.id, transaction_type_id: outgoing.id, spend_category_id: 6, transaction_date: Date.today.days_ago(9), to_or_from: 'pebbles', amount: -3.14)
+Transaction.create(account_id: wilma3.id, transaction_type_id: incoming.id, spend_category_id: 7, transaction_date: Date.today.days_ago(3), to_or_from: 'dino', amount: 500)
+Transaction.create(account_id: wilma3.id, transaction_type_id: outgoing.id, spend_category_id: 8, transaction_date: Date.today.days_ago(37), to_or_from: 'arnold', amount: -20)
+Transaction.create(account_id: wilma3.id, transaction_type_id: incoming.id, spend_category_id: 9, transaction_date: Date.today.days_ago(20), to_or_from: 'sam', amount: 1.34)
+Transaction.create(account_id: wilma4.id, transaction_type_id: outgoing.id, spend_category_id: 10, transaction_date: Date.today.days_ago(3), to_or_from: 'tex', amount: -54.7)
+Transaction.create(account_id: wilma4.id, transaction_type_id: incoming.id, spend_category_id: 11, transaction_date: Date.today.days_ago(2), to_or_from: 'mr. slate', amount: 1000)
+Transaction.create(account_id: wilma4.id, transaction_type_id: outgoing.id, spend_category_id: 12, transaction_date: Date.today.days_ago(5), to_or_from: 'hoppy', amount: -250)

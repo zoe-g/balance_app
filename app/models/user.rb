@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
     ActionController::Base.helpers
   end
 
+  # sums up all transactions in all of a user's accounts
   def total_balance
     total = []
     self.accounts.each do |acc|
@@ -28,6 +29,7 @@ class User < ActiveRecord::Base
     return helpers.number_to_currency(total.sum)
    end
 
+   # sums up all transactions that have been marked 'cleared' in all of a user's accounts
   def cleared_balance
     total = []
     self.accounts.each do |acc|
@@ -37,6 +39,7 @@ class User < ActiveRecord::Base
     return helpers.number_to_currency(total.sum)
   end
 
+  # identifies the timestamp of the last update made to any of the user's transactions
   def last_txn_update
     if self.transactions.first.nil?
       return ''

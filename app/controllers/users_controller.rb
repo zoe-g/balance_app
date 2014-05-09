@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      #creates four accounts to track finances upon signup
       Account.create(user_id: @user.id, account_type_id: 1)
       Account.create(user_id: @user.id, account_type_id: 2)
       Account.create(user_id: @user.id, account_type_id: 3)

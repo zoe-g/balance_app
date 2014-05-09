@@ -20,15 +20,14 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.create transaction_params
 
     if @transaction.transaction_type_id == 3
-      #if txn is a transfer, create a second record to balance out, swapping 'to' and 'from' accounts
-      @transaction2 = Transaction.create transaction_params
-      @transaction2.update_attributes(account_id: @transaction2.to_or_from, to_or_from: @transaction2.account_id)
+      #if txn is a transfer, create a second record to balance out
+      @txn_balance = Transaction.create transaction_params
 
-      #update both records with account names rather than account number, and identify incoming or outgoing
-      name1 = AccountType.find(Account.find(@transaction.to_or_from).account_type_id).name
-      @transaction.update_attributes(to_or_from: name1, transaction_type_id: 1)
-      name2 = AccountType.find(Account.find(@transaction2.to_or_from).account_type_id).name
-      @transaction2.update_attributes(to_or_from: name2, transaction_type_id: 2)
+      #update type to received on second record so it will have a positive amount, and swap to/from accounts
+      @txn_balance.update_attributes(account_id: @transaction.to_or_from, to_or_from: AccountType.find(Account.find(@transaction.account_id).account_type_id).name, transaction_type_id: 2)
+
+      #update type to paid on first record so it will have a negative amount
+      @transaction.update_attributes(to_or_from: AccountType.find(Account.find(@transaction.to_or_from).account_type_id).name, transaction_type_id: 1)
     end
 
     redirect_to transactions_path
@@ -45,7 +44,7 @@ class TransactionsController < ApplicationController
   def update
     @transaction = @current_user.transactions.find(params[:id])
     @transaction.update_attributes transaction_params
-    redirect_to transactions_path
+    redirect_to account_path(@transaction.account_id)
   end
 
   def destroy

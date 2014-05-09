@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   has_many :transactions
   has_many :account_types
 
-
+  # sums up all transactions in an individual account
   def actual_balance
   	total = []
   	self.transactions.each do |txn|
@@ -18,6 +18,7 @@ class Account < ActiveRecord::Base
   	return total.sum #float
   end
 
+  # sums up the transactions that have been marked 'cleared' in an individual account
   def bank_balance
   	total = []
   	self.transactions.each do |txn|
@@ -29,6 +30,7 @@ class Account < ActiveRecord::Base
   	return total.sum #float
   end
 
+  # identifies the timestamp of the last update made to the transactions within an individual account
   def last_txn_update
     if self.transactions.first.nil?
       return ''
