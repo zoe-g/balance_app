@@ -18,6 +18,6 @@ class Transaction < ActiveRecord::Base
   belongs_to :transaction_type
   belongs_to :spend_category
   
-  default_scope order('transaction_date DESC')
+  default_scope { order('transaction_date DESC') }
 
 end

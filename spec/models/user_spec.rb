@@ -16,18 +16,4 @@ describe User do
 
 	end
 
-	describe 'total_balance' do
-
-		it 'should sum all transactions for that user' do
-		end
-
-	end
-
-	describe 'cleared_balance' do
-		
-		it 'should not include transactions that have not been marked cleared' do
-		end
-
-	end
-
 end
