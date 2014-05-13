@@ -8,35 +8,27 @@
 
     <table class="table table-hover detail">
       <thead>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= form_for(@search, url: search_transactions_path, :method => :get) do |f| %>
+        
+        <td>account<br>
+          <%= f.select :account_id, @user_accounts.collect { |account| [ AccountType.find(Account.find(account.id).account_type_id).name, account.id ] }, include_blank: true, class: "form-control" %></td>
+        <td>type<br>
+          <%= f.select :transaction_type_id, [['spent',1],['received',2]], include_blank: true, class: "form-control" %></td>
+        <td>category<br>
+          <%= f.select :spend_category_id, @spend_categories.collect { |cat| [ cat.name, cat.id ] }, include_blank: true, class: "form-control" %></td>
         <td>when</td>
-        <td>who</td>
+        <td>who<br>
+          <%= f.text_field :to_or_from, placeholder: 'to/from', include_blank: true, class: "form-control" %></td>
         <td>why</td>
         <td>how much</td>
-        <td>cleared?</td>
-        <td></td>
+        <td>cleared?<br>
+          <%= f.select :cleared, [['yes',true],['no',false]], include_blank: true, class: "form-control" %></td>
+        <td><br><%= f.submit "filter", class: "btn btn-success" %></td>
+        
+        <% end %>
       </thead>
 
       <tbody>
-
-      <%= form_for(@search, url: search_transactions_path, :method => :get) do |f| %>
-      <tr>
-        <td><%= f.select :account_id, @user_accounts.collect { |account| [ AccountType.find(Account.find(account.id).account_type_id).name, account.id ] }, include_blank: true, class: "form-control" %></td>
-        <td><%= f.select :transaction_type_id, [['spent',1],['received',2]], include_blank: true, class: "form-control" %></td>
-        <td><%= f.select :spend_category_id, @spend_categories.collect { |cat| [ cat.name, cat.id ] }, include_blank: true, class: "form-control" %></td>
-        <td>
-          after <%= f.date_field :date_beg, include_blank: true, class: "form-control" %>
-          before <%= f.date_field :date_end, include_blank: true, class: "form-control" %>
-        </td>
-        <td><%= f.text_field :to_or_from, placeholder: 'to/from', include_blank: true, class: "form-control" %></td>
-        <td></td> 
-        <td></td>
-        <td><%= f.select :cleared, [['yes',true],['no',false]], include_blank: true, class: "form-control" %></td>
-        <td>hold search</td>
-      </tr>
-      <% end %>
 
       <% @transactions.each do |transaction| %>
       <tr>

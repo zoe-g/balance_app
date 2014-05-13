@@ -60,9 +60,9 @@ class Search
     def amount_scope(scope)
       if self.amount_beg.blank? && self.amount_end.blank?
         scope
-      elsif self.amount_end.blank?
+      elsif self.amount_end.blank? && !self.amount_beg.blank?
         scope.where("amount >= #{self.amount_beg}")
-      elsif self.amount_beg.blank?
+      elsif self.amount_beg.blank? && !self.amount_end.blank?
         scope.where("amount <= #{self.amount_end}")
       else
         scope.where("amount >= #{self.amount_beg} AND amount <= #{self.amount_end}")
