@@ -11,7 +11,10 @@ BalanceApp::Application.routes.draw do
   delete '/signout', to: 'sessions#destroy'
 
   resources :accounts, only: [:index, :show]
-  resources :transactions, except: [:show]
+
+  resources :transactions, except: [:show] do
+    get 'search', on: :collection
+  end
 
   post '/notify/bal', to: 'send_text#balance_info'
   post '/notify/rem', to: 'send_text#update_reminder' #not yet scheduled to run

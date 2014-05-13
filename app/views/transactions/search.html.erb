@@ -1,0 +1,60 @@
+<div class="row">
+
+  <!-- show transactions search result -->
+
+  <div class="col-xs-12 acct-update">
+    
+    <h4>search results</h4>
+
+    <table class="table table-hover detail">
+      <thead>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>when</td>
+        <td>who</td>
+        <td>why</td>
+        <td>how much</td>
+        <td>cleared?</td>
+        <td></td>
+      </thead>
+
+      <tbody>
+
+      <%= form_for(@search, url: search_transactions_path, :method => :get) do |f| %>
+      <tr>
+        <td><%= f.select :account_id, @user_accounts.collect { |account| [ AccountType.find(Account.find(account.id).account_type_id).name, account.id ] }, include_blank: true, class: "form-control" %></td>
+        <td><%= f.select :transaction_type_id, [['spent',1],['received',2]], include_blank: true, class: "form-control" %></td>
+        <td><%= f.select :spend_category_id, @spend_categories.collect { |cat| [ cat.name, cat.id ] }, include_blank: true, class: "form-control" %></td>
+        <td>
+          after <%= f.date_field :date_beg, include_blank: true, class: "form-control" %>
+          before <%= f.date_field :date_end, include_blank: true, class: "form-control" %>
+        </td>
+        <td><%= f.text_field :to_or_from, placeholder: 'to/from', include_blank: true, class: "form-control" %></td>
+        <td></td> 
+        <td></td>
+        <td><%= f.select :cleared, [['yes',true],['no',false]], include_blank: true, class: "form-control" %></td>
+        <td>hold search</td>
+      </tr>
+      <% end %>
+
+      <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= image_tag transaction.account.account_type.icon, height: '35' %></td>
+        <td><%= image_tag transaction.transaction_type.icon, height: '35' %></td>
+        <td><%= image_tag transaction.spend_category.icon, height: '35' %></td>
+        <td><%= transaction.transaction_date.to_formatted_s(:long) %></td>
+        <td><%= transaction.to_or_from %></td>
+        <td><%= transaction.note %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
+        <td><%= form_for transaction do |f| %><%= f.check_box :cleared, value: true %><% end %></td>
+        <!--add jquery to auto-submit cleared checkbox!!-->
+        <td><%= button_to 'edit', edit_transaction_path(transaction.id), :method => :get, class: "btn btn-warning" %></td>
+      </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+
+    </div>
+  </div>

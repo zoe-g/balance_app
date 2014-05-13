@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  include TransactionsHelper
 
 	before_filter :signed_in_user
 	before_filter :transactions_owned, only: [:index, :create, :edit, :update, :destroy]
@@ -33,6 +32,17 @@ class TransactionsController < ApplicationController
     redirect_to transactions_path
   end
 
+  # SEARCH TRANSACTIONS
+  def search
+    @spend_categories = SpendCategory.all
+    @user_accounts = @current_user.accounts
+    @search = Search.new search_params
+    if @search.valid?
+      @transactions = @search.search_user_transactions(@current_user.transactions)
+    end
+  end
+
+
   # EDIT TRANSACTION
   def edit
     @transaction = @current_user.transactions.find(params[:id])
@@ -56,6 +66,12 @@ class TransactionsController < ApplicationController
   private
     def transaction_params
       params.require(:transaction).permit(:account_id, :transaction_type_id, :transaction_date, :to_or_from, :amount, :spend_category_id, :note, :cleared)
+    end
+
+    def search_params
+      if (params.has_key? :search)
+        params.require(:search).permit(:account_id, :transaction_type_id, :spend_category_id, :date_beg, :date_end, :to_or_from, :amount_beg, :amount_end, :cleared)
+      end
     end
 
 end

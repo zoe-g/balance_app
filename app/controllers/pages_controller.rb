@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-	include AccountsHelper
 
 	before_filter :signed_in_user
 	before_filter :accounts_owned
