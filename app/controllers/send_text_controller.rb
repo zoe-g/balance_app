@@ -11,6 +11,7 @@ class SendTextController < ApplicationController
 		twilio_sid = ENV['TWILIO_SID']
   	twilio_token = ENV['TWILIO_TOKEN']
   	from_number = ENV['TWILIO_PHONE_NUMBER']
+    ## A reminder here to use the current user method
   	to_number = '+1'+@current_user.phone
   	to_name = @current_user.first_name.downcase
   	total_balance = @current_user.total_balance

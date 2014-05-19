@@ -6,12 +6,14 @@ class TransactionsController < ApplicationController
 
   # TRANSACTIONS
   def index
+    ## Use the current_user method
     @user_transactions = @current_user.transactions
   end
 
   # NEW TRANSACTION
   def new
     @transaction = Transaction.new
+    ## Use the current_user method
     @user_accounts = @current_user.accounts
     @spend_categories = SpendCategory.all
   end
@@ -35,6 +37,7 @@ class TransactionsController < ApplicationController
 
   # EDIT TRANSACTION
   def edit
+    ## Use the current_user method
     @transaction = @current_user.transactions.find(params[:id])
     @user_accounts = @current_user.accounts
     @spend_categories = SpendCategory.all
@@ -42,12 +45,14 @@ class TransactionsController < ApplicationController
 
   # TRANSACTION
   def update
+    ## Use the current_user method
     @transaction = @current_user.transactions.find(params[:id])
     @transaction.update_attributes transaction_params
     redirect_to account_path(@transaction.account_id)
   end
 
   def destroy
+    ## Use the current_user method
     transaction = @current_user.transactions.find(params[:id])
     transaction.delete
     redirect_to transactions_path

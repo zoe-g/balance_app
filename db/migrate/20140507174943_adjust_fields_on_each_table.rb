@@ -1,3 +1,5 @@
+## There is a lot going on with this migration.  It may have made
+## sense to break it up and give it a more descriptive name
 class AdjustFieldsOnEachTable < ActiveRecord::Migration
   def change
   	rename_column(:accounts, :active, :actual_balance)

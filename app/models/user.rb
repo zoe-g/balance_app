@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
     ActionController::Base.helpers
   end
 
+  ## Awesome code!  I like how you used the account model methods
+  ## to write these methods!
+
   # sums up all transactions in all of a user's accounts
   def total_balance
     total = []
