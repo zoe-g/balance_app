@@ -8,6 +8,9 @@ class Account < ActiveRecord::Base
   has_many :transactions
   has_many :account_types
 
+
+  ## Good job putting these methods in the model.  Makes sense here
+  
   # sums up all transactions in an individual account
   def actual_balance
   	total = []

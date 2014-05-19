@@ -1,3 +1,6 @@
+## Good job on the seeds file.  I had plenty to work with
+## when I was testing out your app.
+
 AccountType.delete_all
 TransactionType.delete_all
 SpendCategory.delete_all

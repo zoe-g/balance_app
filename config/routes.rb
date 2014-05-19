@@ -10,6 +10,8 @@ BalanceApp::Application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
+  ## Great job here limiting the resources method to only what you need.
+  ## You definitely don't want routes that do nothing hanging around.
   resources :accounts, only: [:index, :show]
   resources :transactions, except: [:show]
 
